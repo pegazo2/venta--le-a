@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Venta de Leña - Quillay, Peumo, Boldo, Eucalipto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🔥 Venta de Leña por Bines</h1>
+    <p>Precio por bin: <strong>$35.000 CLP</strong></p>
+  </header>
+
+  <section class="galeria">
+    <div class="producto" onclick="mostrarDetalle('quillay')">
+      <img src="quillay.jpg" alt="Leña de Quillay">
+      <h3>Quillay</h3>
+    </div>
+
+    <div class="producto" onclick="mostrarDetalle('peumo')">
+      <img src="peumo.jpg" alt="Leña de Peumo">
+      <h3>Peumo</h3>
+    </div>
+
+    <div class="producto" onclick="mostrarDetalle('boldo')">
+      <img src="boldo.jpg" alt="Leña de Boldo">
+      <h3>Boldo</h3>
+    </div>
+
+    <div class="producto" onclick="mostrarDetalle('eucalipto')">
+      <img src="eucalipto.jpg" alt="Leña de Eucalipto">
+      <h3>Eucalipto</h3>
+    </div>
+  </section>
+
+  <section id="detalle" class="detalle"></section>
+
+  <section class="pedido">
+    <h2>📋 Realizar un Pedido</h2>
+    <form id="formulario">
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+      <input type="number" id="cantidad" placeholder="Cantidad de bines" min="1" required>
+      <button type="submit">Enviar por WhatsApp</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>📞 Contacto: +56 9 1234 5678</p>
+    <p>📍 Región del Libertador Bernardo O'Higgins, Chile</p>
+  </footer>
+
+  <script>
+    function mostrarDetalle(tipo) {
+      const textos = {
+        quillay: "Leña de Quillay: madera dura, ideal para largas jornadas de calefacción.",
+        peumo: "Leña de Peumo: buena duración y aroma suave al quemar.",
+        boldo: "Leña de Boldo: tradicional, con propiedades medicinales al arder.",
+        eucalipto: "Leña de Eucalipto: prende rápido y da buen calor."
+      };
+      document.getElementById('detalle').innerHTML = `
+        <h2>${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</h2>
+        <p>${textos[tipo]}</p>
+      `;
+    }
+
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const direccion = document.getElementById("direccion").value;
+      const cantidad = document.getElementById("cantidad").value;
+
+      const mensaje = `Hola, soy ${nombre}. Quiero pedir ${cantidad} bines de leña para entregar en: ${direccion}`;
+      const telefono = "56912345678"; // ← CAMBIA este número por el tuyo real
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
