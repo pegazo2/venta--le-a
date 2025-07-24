@@ -11,21 +11,18 @@
     <h2>Formulario de Pedido</h2>
 
     <label>Nombre:</label><br>
-    <input type="text" id="nombre" style="width: 100%; margin-bottom: 10px;"><br>
+    <input type="text" id="nombre" style="width: 100%; margin-bottom: 10px;" required><br>
 
     <label>Dirección:</label><br>
-    <input type="text" id="direccion" style="width: 100%; margin-bottom: 10px;"><br>
+    <input type="text" id="direccion" style="width: 100%; margin-bottom: 10px;" required><br>
 
     <label>Tipo de leña:</label><br>
-    <select id="tipo" style="width: 100%; margin-bottom: 10px;">
-      <option value="Quillay">Quillay</option>
-      <option value="Peumo">Peumo</option>
-      <option value="Boldo">Boldo</option>
-      <option value="Eucalipto">Eucalipto</option>
-    </select><br>
+    <p style="font-style: italic; color: #555; margin-bottom: 15px;">
+      La leña viene mezclada (Quillay, Peumo, Boldo, Eucalipto) en cada bin.
+    </p>
 
-    <label>Cantidad (en sacos o metros):</label><br>
-    <input type="text" id="cantidad" style="width: 100%; margin-bottom: 10px;"><br>
+    <label>Cantidad (bin):</label><br>
+    <input type="number" id="cantidad" style="width: 100%; margin-bottom: 10px;" min="1" required><br>
 
     <button onclick="enviarPedido()" style="width: 100%; background-color: green; color: white; padding: 10px; border: none; border-radius: 5px;">
       Enviar por WhatsApp
@@ -36,7 +33,6 @@
     function enviarPedido() {
       var nombre = document.getElementById("nombre").value.trim();
       var direccion = document.getElementById("direccion").value.trim();
-      var tipo = document.getElementById("tipo").value;
       var cantidad = document.getElementById("cantidad").value.trim();
 
       if (nombre === "" || direccion === "" || cantidad === "") {
@@ -44,9 +40,9 @@
         return;
       }
 
-      var mensaje = `Hola, soy ${nombre}. Quiero pedir ${cantidad} de leña tipo ${tipo}. Mi dirección es: ${direccion}.`;
+      var mensaje = `Hola, soy ${nombre}. Quiero pedir ${cantidad} bin(s) de leña mezclada (Quillay, Peumo, Boldo, Eucalipto). Mi dirección es: ${direccion}.`;
 
-      var telefono = "56991368527"; // ← Cambia esto por tu número de WhatsApp
+      var telefono = "56991368527"; // Cambia este número por el tuyo
       var url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
       window.open(url, '_blank');
